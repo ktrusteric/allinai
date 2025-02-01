@@ -1,0 +1,8 @@
+# 强制所有文本文件使用 LF 换行符（Linux/macOS 风格）  
+* text=auto eol=lf  
+
+# 指定二进制文件类型（无需换行符处理）  
+*.png binary  
+*.jpg binary  
+*.jar binary  
+*.zip binary 

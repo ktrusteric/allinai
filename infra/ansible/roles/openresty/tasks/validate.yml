@@ -1,0 +1,6 @@
+- name: 验证实例命名规范
+  fail:
+    msg: "实例名 {{ item.name }} 不符合命名规范"
+  when: >
+    not item.name | regex_match('^[a-z]+_[a-z]+_[0-9]{3}_[0-9]+$')
+  loop: "{{ instances }}" 

@@ -1,0 +1,9 @@
+- name: 同步配置文件
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  loop:
+    - { src: "nginx.conf.j2", dest: "{{ openresty_home }}/{{ instance.name }}/nginx/conf/nginx.conf" }
+    - { src: "cluster_config.yaml.j2", dest: "/etc/openresty/cluster_config.yaml" }
+  when: item.dest is defined 

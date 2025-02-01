@@ -1,0 +1,22 @@
+# 原内容：
+- name: 安装依赖
+  yum: 
+    name: ["openssl-devel", "pcre-devel", "zlib-devel"]
+    
+- name: 创建实例目录
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: 0755
+
+# 建议增加：
+- name: 推送集群配置模板
+  template:
+    src: nginxcluster_config.yaml.j2
+    dest: /etc/openresty/cluster_config.yaml
+    mode: 0644
+
+- name: 执行批量安装脚本
+  command: /allinai/scripts/install_openresty_multi.sh /etc/openresty/cluster_config.yaml
+  register: install_result
+  changed_when: "'DONE' in install_result.stdout"

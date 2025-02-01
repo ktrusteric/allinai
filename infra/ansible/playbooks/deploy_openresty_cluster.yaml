@@ -1,0 +1,16 @@
+---
+# 部署目标：openresty_servers 主机组
+# 主部署剧本：协调角色执行顺序
+# 指定目标主机组、变量文件引用、角色调用逻辑
+# 执行流程：加载变量 -> 执行角色任务
+
+- name: 部署 OpenResty 集群
+  hosts: openresty_servers
+  become: yes  # 提权执行
+  vars_files:
+    - ../inventory/production/group_vars/openresty.yaml
+
+  tasks:
+    - name: 包含角色任务
+      include_role:
+        name: openresty  # 调用 openresty 角色 

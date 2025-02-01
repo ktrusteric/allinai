@@ -1,0 +1,21 @@
+---
+# 动态生成集群配置的核心模板
+# 变量来源：group_vars/openresty.yaml
+openrestyhome: "{{ openresty_home }}"  # 安装根目录
+version: "{{ version }}"  # 指定版本
+
+global:
+  user: "{{ global_user | default('nginx') }}"  # 默认用户设置
+  group: "{{ global_group | default('nginx') }}"
+  compile_options:  # 编译参数循环展开
+    {% for opt in compile_options %}
+    - "{{ opt }}"
+    {% endfor %}
+
+instances:  # 实例列表动态生成
+  {% for instance in instances %}
+  - name: "{{ instance.name }}"
+    port: "{{ instance.port }}"
+    env: "{{ instance.env }}"
+    module: "{{ instance.module }}"
+  {% endfor %} 

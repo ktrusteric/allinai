@@ -1,0 +1,36 @@
+openrestyhome: "/allinai/apps/openresty"  # 新增根目录配置
+version: "1.21.4.1"  # 固定版本号
+
+global:
+  # 全局用户/组配置
+  user: "nginx"
+  group: "nginx"
+  
+  # 编译参数配置
+  compile_options:
+    - "--with-http_ssl_module"
+    - "--with-luajit"
+    - "--with-threads"
+    - "--with-http_v2_module"
+    - "--with-stream"
+    - "--with-http_realip_module"
+    - "--with-http_stub_status_module"
+    - "--with-http_gzip_static_module"
+    - "--with-pcre-jit"
+    - "--with-file-aio"
+    - "--with-http_sub_module"
+    - "--with-http_iconv_module"
+    # 安全相关模块
+    # - "--with-http_secure_link_module"
+    # - "--with-http_auth_request_module"
+    # 如需MySQL支持需确认系统已安装开发包
+    # - "--with-mysql"
+    # - "--with-mysql-lib=/usr/lib/mysql"
+    # - "--with-mysql-include=/usr/include/mysql"
+
+# 实例列表
+instances:
+  - port: 8400  
+  - port: 8500  
+  - port: 8600
+    

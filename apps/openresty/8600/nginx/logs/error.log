@@ -1,0 +1,4 @@
+2025/02/01 12:41:25 [warn] 460708#460708: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /allinai/apps/openresty/8600/nginx/conf/nginx.conf:1
+2025/02/01 12:41:25 [emerg] 460708#460708: invalid number of arguments in "listen" directive in /allinai/apps/openresty/8600/nginx/conf/nginx.conf:16
+2025/02/01 13:12:11 [warn] 467943#467943: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /allinai/apps/openresty/8600/nginx/conf/nginx.conf:1
+2025/02/01 13:12:11 [warn] 467944#467944: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /allinai/apps/openresty/8600/nginx/conf/nginx.conf:1

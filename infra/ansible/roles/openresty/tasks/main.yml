@@ -1,0 +1,14 @@
+---
+# 任务编排逻辑：
+# 1. 验证输入 -> 2. 安装 -> 3. 配置
+- name: 验证输入参数
+  include_tasks: validate.yml
+  tags: validate
+
+- name: 安装 OpenResty
+  include_tasks: install.yml
+  tags: install
+
+- name: 配置管理
+  include_tasks: configure.yml
+  tags: configure

@@ -1,0 +1,18 @@
+**/*.tar
+**/apk_cache
+**/pip_cache
+
+# 忽略 Ansible 临时文件
+*.retry
+*.swp
+
+# 忽略本地配置文件
+inventory/local/
+!inventory/production/
+
+# 忽略生成文件
+inventory/production/hosts
+
+# 忽略 IDE 文件
+.vscode/
+.idea/
