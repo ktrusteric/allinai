@@ -1,0 +1,16 @@
+- name: 测试Docker化MySQL
+  hosts: mysql
+  vars:
+    ansible_host: mysql
+    ansible_user: root
+    ansible_ssh_pass: SecurePass123!
+  tasks:
+    - name: 创建配置表
+      mysql_query:
+        login_db: allinai_config
+        query: |
+          CREATE TABLE IF NOT EXISTS cluster_config (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            node_name VARCHAR(255) UNIQUE,
+            vip VARCHAR(15)
+          ); 

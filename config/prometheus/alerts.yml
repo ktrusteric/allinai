@@ -1,0 +1,18 @@
+groups:
+- name: instance_status
+  rules:
+  - alert: ServiceDown
+    expr: up{job="openresty"} == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      description: "实例 {{ $labels.instance }} 已下线超过5分钟"
+      
+  - alert: HighErrorRate
+    expr: rate(nginx_http_requests_total{status=~"5.."}[5m]) > 0.1
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: "5xx错误率超过10%" 

@@ -1,0 +1,6 @@
+- targets:
+  - 'openresty:8400'
+  - 'openresty:8500'
+  labels:
+    service: 'openresty'
+    env: 'prod' 

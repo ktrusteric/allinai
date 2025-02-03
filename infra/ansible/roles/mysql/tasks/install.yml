@@ -1,0 +1,11 @@
+- name: 安装MySQL服务器
+  package:
+    name: 
+      - "{{ 'mysql-server' if ansible_os_family == 'Debian' else 'mysql-community-server' }}"
+    state: present
+
+- name: 启动MySQL服务
+  service:
+    name: mysqld
+    state: started
+    enabled: yes

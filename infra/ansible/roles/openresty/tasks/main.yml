@@ -12,3 +12,14 @@
 - name: 配置管理
   include_tasks: configure.yml
   tags: configure
+
+- name: 创建配置目录
+  file:
+    path: "/allinai/apps/openresty/{{ instance_port }}/nginx/conf"
+    state: directory
+    mode: 0755
+
+- name: 部署主配置
+  template:
+    src: nginx.conf.j2
+    dest: "/allinai/apps/openresty/{{ instance_port }}/nginx/conf/nginx.conf"

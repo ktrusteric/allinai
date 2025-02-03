@@ -1,0 +1,17 @@
+jobs:
+  build-mysql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build MySQL image
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        run: |
+          docker build \
+            --build-arg MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
+            -t allinai/mysql:$GITHUB_SHA \
+            -f infra/docker/mysql/Dockerfile .
+      
+      - name: Push to Registry
+        run: docker push allinai/mysql:$GITHUB_SHA 

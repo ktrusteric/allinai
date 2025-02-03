@@ -1,0 +1,7 @@
+scrape_configs:
+  - job_name: 'openresty'
+    static_configs:
+      - targets: ['openresty:9145']
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['mysql:9104'] 

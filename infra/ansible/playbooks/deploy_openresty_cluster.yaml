@@ -8,9 +8,14 @@
   hosts: openresty_servers
   become: yes  # 提权执行
   vars_files:
-    - ../inventory/production/group_vars/openresty.yaml
+    - "{{ lookup('env','ANSIBLE_BASE') }}/inventory/production/group_vars/openresty.yaml"
+  vars:
+    external_install_path: "{{ web_install_path }}"  # 从前端传入
+    external_bin_path: "{{ web_bin_path }}"
 
   tasks:
     - name: 包含角色任务
       include_role:
         name: openresty  # 调用 openresty 角色 
+  roles:
+    - openresty 

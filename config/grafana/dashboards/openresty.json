@@ -1,0 +1,13 @@
+{
+  "title": "OpenResty实例监控",
+  "panels": [
+    {
+      "title": "请求率",
+      "type": "graph",
+      "targets": [{
+        "expr": "sum(rate(nginx_http_requests_total{instance=~\"$instance\"}[5m]))",
+        "legendFormat": "{{instance}}"
+      }]
+    }
+  ]
+} 

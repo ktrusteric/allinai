@@ -1,0 +1,10 @@
+- name: 管理Windows MySQL
+  hosts: local_mysql
+  tasks:
+    - name: 执行SQL查询
+      community.mysql.mysql_query:
+        login_path: "root@localhost"
+        query: "SHOW DATABASES"
+      vars:
+        ansible_winrm_transport: basic
+        ansible_winrm_server_cert_validation: ignore 

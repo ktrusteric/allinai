@@ -1,0 +1,5 @@
+openresty_bin_path: "{{ external_bin_path | default(openrestyhome + '/bin') }}"
+openresty_home: "{{ external_install_path | default('/allinai/apps/openresty') }}"
+# 常见安装路径选项：
+# /usr/local/openresty/bin
+# /opt/openresty-1.21.4.1/bin 

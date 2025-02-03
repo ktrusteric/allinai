@@ -1,0 +1,7 @@
+- job_name: 'openresty'
+  file_sd_configs:
+    - files:
+        - '/etc/prometheus/openresty_targets.json'
+  metrics_path: /nginx_status
+  params:
+    format: [prometheus] 

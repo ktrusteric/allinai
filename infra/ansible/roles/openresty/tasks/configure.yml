@@ -6,4 +6,28 @@
   loop:
     - { src: "nginx.conf.j2", dest: "{{ openresty_home }}/{{ instance.name }}/nginx/conf/nginx.conf" }
     - { src: "cluster_config.yaml.j2", dest: "/etc/openresty/cluster_config.yaml" }
-  when: item.dest is defined 
+  when: item.dest is defined
+
+- name: 按实例热加载
+  command: "{{ openresty_bin_path }}/openresty -s reload -p {{ instance.home }}"
+  loop: "{{ openresty_instances }}"
+  when: instance.auto_reload  # 实例级重载开关
+
+- name: 配置语法检查
+  command: "{{ openresty_bin_path }}/openresty -t -c {{ nginx_conf_path }}"
+  register: config_test
+  changed_when: false
+  failed_when: "config_test.rc != 0"
+
+- name: 获取OpenResty路径
+  uri:
+    url: "{{ config_center_url }}/openresty/paths"
+    method: GET
+  register: path_config
+  changed_when: false
+
+- name: 设置动态路径
+  set_fact:
+    openresty_bin_path: "{{ path_config.json[version].bin_path }}"
+    openresty_home: "{{ path_config.json[version].install_path }}"
+    cacheable: yes  # 允许跨任务共享变量
