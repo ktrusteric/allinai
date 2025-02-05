@@ -93,26 +93,7 @@ E --> G[(Prometheus)]
 F --> G
 G --> H[Grafana]
 
-### 9. 数据库设计
-sql:readme.md
--- 实例表
-CREATE TABLE instances (
-id VARCHAR(36) PRIMARY KEY, -- 实例唯一标识
-name VARCHAR(64) UNIQUE, -- 实例名称 web-payment_001_8080
-install_path VARCHAR(255), -- 安装路径
-status ENUM('running', 'stopped', 'error'),
-last_modified TIMESTAMP
-);
--- 配置版本表
-CREATE TABLE config_versions (
-version_id INT AUTO_INCREMENT PRIMARY KEY,
-instance_id VARCHAR(36),
-config_hash CHAR(64),
-backup_path VARCHAR(255),
-FOREIGN KEY (instance_id) REFERENCES instances(id)
-);
-
-### 10. Roadmap
+### 9. Roadmap
 1. 第一阶段（2周）：基础实例管理 + 配置备份
 2. 第二阶段（3周）：动态配置更新 + 健康检查扩展
 3. 第三阶段（1周）：监控系统集成
